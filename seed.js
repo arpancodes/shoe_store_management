@@ -74,7 +74,7 @@ db.query(
 );
 
 db.query(
-  "INSERT into Shop values(),
+  `INSERT into Shop values(1,"Air","Jordan","the smoothest of all","bangalore, marathalli","")`,
   (err, result) => {
     if (err) {
       console.log(err);
