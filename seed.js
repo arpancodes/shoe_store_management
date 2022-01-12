@@ -172,6 +172,8 @@ db.query(
   }
 );
 
+
+
 db.query(
   `INSERT into Shoe values(101,"nike", 9, "white", 15000, "this will redefine your swag and will make everyone feel your presence", 01)`,
   (err, result) => {
@@ -206,7 +208,7 @@ db.query(
 );
 
 db.query(
-  `INSERT into Manager values(21,101,51),(22,103,54)`,
+  `INSERT into Manager values(21,1,51),(22,3,54)`,
   (err, result) => {
     if (err) {
       console.log(err);
@@ -217,7 +219,7 @@ db.query(
 );
 
 db.query(
-  `INSERT into Order values (120, 102, 50, "Nike Sneakers", "out for delivery" ), (121, 104, 52, "Relaince Trends", "order placed"),(122,101, 53, "Nike Sneakers", "shipped"),(123,103,50,"Adidas Shoes","out for delivery"),(124,105, 52, "Versace Leathers" ,"order placed")`,
+  `INSERT into Orders values (120, 102, 50, "Nike Sneakers", "out for delivery" ), (121, 104, 52, "Relaince Trends", "order placed"),(122,101,53, "Nike Sneakers", "shipped"),(123,103,50,"Adidas Shoes","out for delivery"),(124,105, 52, "Versace Leathers" ,"order placed")`,
   (err, result) => {
     if (err) {
       console.log(err);
@@ -228,7 +230,7 @@ db.query(
 );
 
 db.query(
-  `INSERT into Payment values(200,50,"cash", "2010-03-12 16:35:22", "15000"),(201,50,"cash","2020-04-15 17"20:25", 10000 ),(202,52,"upi","2021-12-29 19:56:12", 25500),(203,53,"card","2015-09-24 23:45:57", 10000),(204,53,"card","2017-10-24 15:36:47", 15000)`,
+  `INSERT into Payment values(200,120,50,"cash", "2010-03-12 16:35:22", 15000),(201,123,50,"cash","2020-04-15 17:20:25", 10000 ),(202,121,52,"upi","2021-12-29 19:56:12", 25500),(203,122,53,"card","2015-09-24 23:45:57", 10000),(204,124,52,"card","2017-10-24 15:36:47", 15000)`,
   (err, result) => {
     if (err) {
       console.log(err);
@@ -237,5 +239,6 @@ db.query(
     }
   }
 );
+
 
 
