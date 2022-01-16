@@ -76,4 +76,29 @@ const comparePassword = (candidatePassword, hash) => {
   });
 };
 
-module.exports = { comparePassword, insertIntoUserQuery, getUserByEmail };
+const getShopbyid = (id) => {
+  return new Promise((resolve, reject) => {
+    db.query(`SELECT * from shop where id = ?`, [id], (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log("Values fetched from User");
+        resolve(result[0]);
+      }
+    });
+  });
+};
+
+const getShops = () => {
+  return new Promise((resolve, reject) => {
+    db.query(`SELECT * from shop `, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log("Values fetched from shop");
+        resolve(result);
+      }
+    });
+  });
+};
+module.exports = { comparePassword, insertIntoUserQuery, getUserByEmail, getShopbyid, getShops };
