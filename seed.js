@@ -10,7 +10,7 @@ const db = mysql.createPool({
 const createShopQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      "CREATE TABLE if not exists shop (id int primary key, fname varchar(50) NOT NULL, lname varchar(50) NOT NULL, tagline varchar(100), address varchar(255), image varchar(255))",
+      "CREATE TABLE if not exists shop (id int AUTO_INCREMENT primary key, fname varchar(50) NOT NULL, lname varchar(50) NOT NULL, tagline varchar(100), address varchar(255), image varchar(255))",
       (err, result) => {
         if (err) {
           reject(err);
@@ -50,7 +50,7 @@ const insertIntoShopQuery = () => {
 const createUserQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      "CREATE TABLE if not exists user (id int primary key, fname varchar(50) NOT NULL, lname varchar(50) NOT NULL, email varchar(100) NOT NULL, gender char(1) NOT NULL, address varchar(55) NOT NULL, phone varchar(10) NOT NULL, type varchar(20) NOT NULL)",
+      "CREATE TABLE if not exists user (id int AUTO_INCREMENT primary key, fname varchar(50) NOT NULL, lname varchar(50) NOT NULL, email varchar(100) NOT NULL, gender char(1) NOT NULL, address varchar(55) NOT NULL, phone varchar(10) NOT NULL, type varchar(20) NOT NULL)",
       (err, result) => {
         if (err) {
           reject(err);
@@ -86,7 +86,7 @@ const insertIntoUserQuery = () => {
 const createShoeQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      "create table if not exists shoe (id int primary key, brand varchar(50) NOT NULL, size int NOT NULL, color varchar(40) NOT NULL, cost int NOT NULL, description text, shop_id int, foreign key(shop_id) references shop(id) on delete cascade on update cascade)",
+      "create table if not exists shoe (id int AUTO_INCREMENT primary key, brand varchar(50) NOT NULL, size int NOT NULL, color varchar(40) NOT NULL, cost int NOT NULL, description text, shop_id int, foreign key(shop_id) references shop(id) on delete cascade on update cascade)",
       (err, result) => {
         if (err) {
           reject(err);
@@ -186,7 +186,7 @@ const insertIntoOrderQuery = () => {
 const createPaymentQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      "CREATE TABLE if not exists payment (id int, ord_id int, foreign key(ord_id) references orders(order_id) on delete cascade on update cascade, user_id int, foreign key(user_id) references user(id) on delete cascade on update cascade, mode varchar(50) NOT NULL, time datetime NOT NULL, amount int NOT NULL)",
+      "CREATE TABLE if not exists payment (id int primary key, ord_id int, foreign key(ord_id) references orders(order_id) on delete cascade on update cascade, user_id int, foreign key(user_id) references user(id) on delete cascade on update cascade, mode varchar(50) NOT NULL, time datetime NOT NULL, amount int NOT NULL)",
       (err, result) => {
         if (err) {
           reject(err);
