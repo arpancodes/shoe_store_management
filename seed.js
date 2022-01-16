@@ -50,7 +50,7 @@ const insertIntoShopQuery = () => {
 const createUserQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      "CREATE TABLE if not exists user (id int AUTO_INCREMENT primary key, fname varchar(50) NOT NULL, lname varchar(50) NOT NULL, email varchar(100) NOT NULL, gender char(1) NOT NULL, address varchar(55) NOT NULL, phone varchar(10) NOT NULL, type varchar(20) NOT NULL)",
+      "CREATE TABLE if not exists user (id int AUTO_INCREMENT primary key, fname varchar(50) NOT NULL, lname varchar(50) NOT NULL, email varchar(100) NOT NULL, gender char(1) NOT NULL, address varchar(55) NOT NULL, phone varchar(10) NOT NULL, type varchar(20) NOT NULL, password varchar(100) NOT NULL)",
       (err, result) => {
         if (err) {
           reject(err);
@@ -65,12 +65,13 @@ const createUserQuery = () => {
 const insertIntoUserQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      `INSERT into User values
-        (50,"Anwesh", "Mishra", "anom.0@gmail.com", "m", "patna", 555, "customer"),
-        (51,"Arpan", "Abhishek", "arpan.69@gmail.com","m","bangalore", 666, "manager"),
-        (52,"Abhinav","Kumar","abhikumar@gmail.com","m","mumbai",444,"customer"),
-        (53,"Amartya","Nambiar","nambo.420@gmail.com","f","kerela", 696, "customer"),
-        (54,"Ankit","Saurabh","ankit.chotu@gmail.com","m","delhi", 777, "manager")`,
+      `INSERT into User (fname, lname, email, gender, address, phone, type, password)
+       values
+        ("Anwesh", "Mishra", "anom.0@gmail.com", "m", "patna", 555, "customer", "testpassword"),
+        ("Arpan", "Abhishek", "arpan.69@gmail.com","m","bangalore", 666, "manager", "testpassword"),
+        ("Abhinav","Kumar","abhikumar@gmail.com","m","mumbai",444,"customer", "testpassword"),
+        ("Amartya","Nambiar","nambo.420@gmail.com","f","kerela", 696, "customer", "testpassword"),
+        ("Ankit","Saurabh","ankit.chotu@gmail.com","m","delhi", 777, "manager", "testpassword")`,
       (err, result) => {
         if (err) {
           reject(err);
@@ -136,7 +137,7 @@ const createManagerQuery = () => {
 };
 const insertIntoManagerQuery = () => {
   return new Promise((resolve, reject) => {
-    db.query(`INSERT into Manager values(21,1,51),(22,3,54)`, (err, result) => {
+    db.query(`INSERT into Manager values(21,1,1),(22,3,4)`, (err, result) => {
       if (err) {
         reject(err);
       } else {
@@ -166,11 +167,11 @@ const insertIntoOrderQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
       `INSERT into Orders values
-      (120, 102, 50, "Nike Sneakers", "out for delivery" ),
-      (121, 104, 52, "Relaince Trends", "order placed"),
-      (122,101,53, "Nike Sneakers", "shipped"),
-      (123,103,50,"Adidas Shoes","out for delivery"),
-      (124,105, 52, "Versace Leathers" ,"order placed")`,
+      (120, 102, 1, "Nike Sneakers", "out for delivery" ),
+      (121, 104, 2, "Relaince Trends", "order placed"),
+      (122,101,3, "Nike Sneakers", "shipped"),
+      (123,103,1,"Adidas Shoes","out for delivery"),
+      (124,105, 2, "Versace Leathers" ,"order placed")`,
       (err, result) => {
         if (err) {
           reject(err);
@@ -203,11 +204,11 @@ const insertIntoPaymentQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
       `INSERT into Payment values
-      (200,120,50,"cash", "2010-03-12 16:35:22", 15000),
-      (201,123,50,"cash","2020-04-15 17:20:25", 10000),
-      (202,121,52,"upi","2021-12-29 19:56:12", 25500),
-      (203,122,53,"card","2015-09-24 23:45:57", 10000),
-      (204,124,52,"card","2017-10-24 15:36:47", 15000)`,
+      (200,120,1,"cash", "2010-03-12 16:35:22", 15000),
+      (201,123,1,"cash","2020-04-15 17:20:25", 10000),
+      (202,121,2,"upi","2021-12-29 19:56:12", 25500),
+      (203,122,3,"card","2015-09-24 23:45:57", 10000),
+      (204,124,2,"card","2017-10-24 15:36:47", 15000)`,
       (err, result) => {
         if (err) {
           reject(err);

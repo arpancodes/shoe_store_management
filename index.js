@@ -1,16 +1,16 @@
 const express = require("express");
-const mysql = require("mysql");
 require("dotenv").config();
+const authRouter = require("./routers/auth");
+const shopRouter = require("./routers/shop");
+const orderRouter = require("./routers/order");
 
 const app = express();
 app.use(express.json()); // parses incoming requests with JSON payloads
+app.use(express.urlencoded({ extended: true })); // parses incoming requests with URL encoded payloads
 
-const db = mysql.createPool({
-  host: process.env.DB_HOST, //localhost
-  user: process.env.DB_USER, //root
-  password: process.env.DB_PASSWORD, //password
-  database: process.env.DB, //ravenbooks
-});
+app.use("/shops", shopRouter);
+app.use("/auth", authRouter);
+app.use("/order", orderRouter);
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("App is listening on port " + listener.address().port);
