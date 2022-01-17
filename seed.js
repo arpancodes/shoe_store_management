@@ -131,7 +131,7 @@ const insertIntoShoeQuery = () => {
       ("Trends hi", 10, "yellow", 16000,"casual yellow you can wear anywhere",08, "https://assets.ajio.com/medias/sys_master/root/20210218/CM6f/602e66ce7cdb8c1f1443705d/hi-attitude_brown_printed_slip-on_causal_shoes.jpg"),
       ("Campus First", 10, "white", 15000,"comfort at its best",09, "https://cdn.shopify.com/s/files/1/0607/6678/1671/products/FIRST-11G-787-WHT-SIL-B.ORG_2_460x.jpg?v=1639241973"),
       ("Campus Asia", 10, "black", 10000,"casual cum stylish you can put on going anywhere",09, "https://cdn.shopify.com/s/files/1/0607/6678/1671/products/CG-352-G-BLK-RED-1_460x.jpg?v=1639240837")`,
-      
+
       (err, result) => {
         if (err) {
           reject(err);
@@ -147,7 +147,7 @@ const insertIntoShoeQuery = () => {
 const createManagerQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      "CREATE TABLE if not exists manager (id int primary key, shop_id int, foreign key(shop_id) references shop(id), user_id int, foreign key(user_id) references user(id))",
+      "CREATE TABLE if not exists manager (id int AUTO_INCREMENT primary key, shop_id int, foreign key(shop_id) references shop(id), user_id int, foreign key(user_id) references user(id))",
       (err, result) => {
         if (err) {
           reject(err);
@@ -161,14 +161,17 @@ const createManagerQuery = () => {
 };
 const insertIntoManagerQuery = () => {
   return new Promise((resolve, reject) => {
-    db.query(`INSERT into Manager values(21,1,1),(22,2,2),(23,3,3),(24,4,4),(25,5,5),(26,6,6),(27,7,7),(28,8,8),(29,9,9)`, (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        console.log("Values inserted into Manager");
-        resolve(result);
+    db.query(
+      `INSERT into Manager (shop_id, user_id) values(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9)`,
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values inserted into Manager");
+          resolve(result);
+        }
       }
-    });
+    );
   });
 };
 

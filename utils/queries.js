@@ -151,13 +151,14 @@ const getLastOrderNo = () => {
 const getShopOrders = (UserID) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `SELECT id, shoe_id, cus_id, status, quantity, amount, brand, size, color, cost, description, shop_id, image, fname, lname from manager m, shoe s, orders o, shop p where m.user_id = 4 and m.shop_id = s.shop_id and s.id = o.shoe_id and p.id = s.shop_id`,
+      `SELECT order_id, shoe_id, cus_id, status, quantity, amount, brand, size, color, cost, description, p.id, s.image, fname, lname from manager m, shoe s, orders o, shop p where m.user_id = ? and m.shop_id = s.shop_id and s.id = o.shoe_id and p.id = s.shop_id`,
+      [UserID],
       (err, result) => {
         if (err) {
           reject(err);
         } else {
           console.log("Values fetched from tables");
-          resolve(result[0]);
+          resolve(result);
         }
       }
     );
@@ -171,23 +172,58 @@ const getItemPrice = (ItemID) => {
         reject(err);
       } else {
         console.log("Values fetched from Shoes");
+        resolve(result[0]);
+      }
+    });
+  });
+};
+
+const createOrder = (CompleteOrder) => {
+  return new Promise((resolve, reject) => {
+    db.query(`Insert into orders values ?`, [CompleteOrder], (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log("Values inserted in orders");
         resolve(result);
       }
     });
   });
 };
 
-const CreateOrder = (CompleteOrder) => {
+const updateUserAsManager = (userId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `Insert into orders values = ?`,
-      [CompleteOrder],
+      `UPDATE User set type = 'manager' where id = ?`,
+      [userId],
       (err, result) => {
         if (err) {
           reject(err);
         } else {
           console.log("Values inserted in orders");
           resolve(result);
+        }
+      }
+    );
+  });
+};
+
+const createManager = (userId, shopId) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `Insert into Manager (shop_id, user_id) values (?)`,
+      [[shopId, userId]],
+      async (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values inserted in Manager");
+          try {
+            await updateUserAsManager(userId);
+            resolve(result);
+          } catch (err) {
+            reject(err);
+          }
         }
       }
     );
@@ -205,5 +241,6 @@ module.exports = {
   getLastOrderNo,
   getShopOrders,
   getItemPrice,
-  CreateOrder,
+  createOrder,
+  createManager,
 };

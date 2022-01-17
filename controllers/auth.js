@@ -3,6 +3,7 @@ const {
   comparePassword,
   insertIntoUserQuery,
   getUserByEmail,
+  createManager,
 } = require("../utils/queries");
 
 const register = async (req, res) => {
@@ -60,4 +61,14 @@ const logout = (req, res) => {
   });
 };
 
-module.exports = { register, login, logout };
+const makeManager = async (req, res) => {
+  const { userId, shopId } = req.params;
+  try {
+    await createManager(userId, shopId);
+    return res.json({ success: true, message: "User made manager" });
+  } catch (e) {
+    return res.status(500).json({ success: false, message: e });
+  }
+};
+
+module.exports = { register, login, logout, makeManager };

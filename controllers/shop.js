@@ -3,6 +3,7 @@ const {
   getShopById,
   getShoesByShopID,
   getShoeByID,
+  getShopOrders,
 } = require("../utils/queries");
 
 const getShopsHandler = (req, res) => {
@@ -57,4 +58,26 @@ const getShoeInfoHandler = (req, res) => {
     });
 };
 
-module.exports = { getShopsHandler, getShopInfoHandler, getShoeInfoHandler };
+const getShopOrdersHandler = async (req, res) => {
+  try {
+    const orders = await getShopOrders(req.userId);
+    res.status(200).json({
+      success: true,
+      data: {
+        orders,
+      },
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e,
+    });
+  }
+};
+
+module.exports = {
+  getShopsHandler,
+  getShopInfoHandler,
+  getShoeInfoHandler,
+  getShopOrdersHandler,
+};
