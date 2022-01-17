@@ -147,6 +147,22 @@ const getLastOredrNo = () => {
     );
   });
 };
+
+const getShopOrders = (UserID) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `SELECT id, shoe_id, cus_id, status, quantity, amount, brand, size, color, cost, description, shop_id, image, fname, lname from manager m, shoe s, orders o, shop p where m.user_id = 4 and m.shop_id = s.shop_id and s.id = o.shoe_id and p.id = s.shop_id`,
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values fetched from tables");
+          resolve(result[0]);
+        }
+      }
+    );
+  });
+};
 module.exports = {
   comparePassword,
   insertIntoUserQuery,
@@ -156,5 +172,6 @@ module.exports = {
   getShoesByShopID,
   getShoeByID,
   getLastOredrNo,
+  getShopOrders,
   
 };

@@ -10,7 +10,7 @@ const db = mysql.createPool({
 const createShopQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      "CREATE TABLE if not exists shop (id int AUTO_INCREMENT primary key, fname varchar(50) NOT NULL, lname varchar(50) NOT NULL, tagline varchar(100), address varchar(255), image varchar(255))",
+      "CREATE TABLE if not exists shop (id int AUTO_INCREMENT primary key, name varchar(50) NOT NULL, tagline varchar(100), address varchar(255), image varchar(255))",
       (err, result) => {
         if (err) {
           reject(err);
@@ -27,15 +27,15 @@ const insertIntoShopQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
       `INSERT into Shop values
-        (01,"Air","Jordan","the smoothest of all","bangalore, marathalli","https://seeklogo.com/images/A/air-jordan-logo-66B3A1FAAF-seeklogo.com.png"),
-        (02,"Nike","Sneakers","Just do it","mumbai, bandra","https://i.insider.com/53d29d5c6bb3f7a80617ada8?width=1000&format=jpeg&auto=webp"),
-        (03,"Adidas","Shoes","the Goat of Shoes","bihar, patna","https://www.fineprintart.com/images/blog/history-adidas-logo/adidas-trefoil-logo.png"),
-        (04,"Puma","Steps","Comfortable as ever","tamil nadu, chennai","https://upload.wikimedia.org/wikipedia/en/thumb/4/49/Puma_AG.svg/1200px-Puma_AG.svg.png"),
-        (05,"Crocs","Flippers","Why to hide when you can show it all","delhi","https://1000logos.net/wp-content/uploads/2018/12/Crocs-logo.png"),
-        (06,"Bata","Formals","Bata job lata hai","U.P., lucknow","https://www.scrolldroll.com/wp-content/uploads/2020/01/Bata-Logo.jpg"),
-        (07,"Versace","Leathers","the royal bliss","haryana, gurgaon","https://i.pinimg.com/originals/ea/29/1e/ea291eefaee8beffa519b513a28f314e.png"),
-        (08,"Relaince","Trends","Growth is life","mumbai, east andheri","https://findlogovector.com/wp-content/uploads/2019/03/reliance-trends-logo-vector.png"),
-        (09,"Campus","Life","simple and significant","bangalore, marathalli","https://cdn.i.haymarketmedia.asia/?n=campaign-india%2Fcontent%2Fcampus+new+logo.jpg&h=630&w=1200&q=75&v=20170226&c=1")`,
+        (01,"Air Jordan","the smoothest of all","bangalore, marathalli","https://seeklogo.com/images/A/air-jordan-logo-66B3A1FAAF-seeklogo.com.png"),
+        (02,"Nike Sneakers","Just do it","mumbai, bandra","https://i.insider.com/53d29d5c6bb3f7a80617ada8?width=1000&format=jpeg&auto=webp"),
+        (03,"Adidas","the Goat of Shoes","bihar, patna","https://www.fineprintart.com/images/blog/history-adidas-logo/adidas-trefoil-logo.png"),
+        (04,"Puma","Comfortable as ever","tamil nadu, chennai","https://upload.wikimedia.org/wikipedia/en/thumb/4/49/Puma_AG.svg/1200px-Puma_AG.svg.png"),
+        (05,"Crocs","Why to hide when you can show it all","delhi","https://1000logos.net/wp-content/uploads/2018/12/Crocs-logo.png"),
+        (06,"Bata","Bata job lata hai","U.P., lucknow","https://www.scrolldroll.com/wp-content/uploads/2020/01/Bata-Logo.jpg"),
+        (07,"Versace","the royal bliss","haryana, gurgaon","https://i.pinimg.com/originals/ea/29/1e/ea291eefaee8beffa519b513a28f314e.png"),
+        (08,"Relaince Trends","Growth is life","mumbai, east andheri","https://findlogovector.com/wp-content/uploads/2019/03/reliance-trends-logo-vector.png"),
+        (09,"Campus","simple and significant","bangalore, marathalli","https://cdn.i.haymarketmedia.asia/?n=campaign-india%2Fcontent%2Fcampus+new+logo.jpg&h=630&w=1200&q=75&v=20170226&c=1")`,
       (err, result) => {
         if (err) {
           reject(err);
@@ -161,7 +161,7 @@ const createManagerQuery = () => {
 };
 const insertIntoManagerQuery = () => {
   return new Promise((resolve, reject) => {
-    db.query(`INSERT into Manager values(21,1,1),(22,3,4)`, (err, result) => {
+    db.query(`INSERT into Manager values(21,1,1),(22,2,2),(23,3,3),(24,4,4),(25,5,5),(26,6,6),(27,7,7),(28,8,8),(29,9,9)`, (err, result) => {
       if (err) {
         reject(err);
       } else {
