@@ -163,6 +163,33 @@ const getShopOrders = (UserID) => {
     );
   });
 };
+
+const getItemPrice = (ItemID) => {
+  return new Promise((resolve, reject) => {
+    db.query(`SELECT cost from Shoe where id = ?`, [ItemID], (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log("Values fetched from Shoes");
+        resolve(result);
+      }
+    });
+  });
+};
+
+const CreateOrder = (CompleteOrder) => {
+  return new Promise((resolve, reject) => {
+    db.query(`Insert into orders values = ?`, [CompleteOrder], (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log("Values inserted in orders");
+        resolve(result);
+      }
+    });
+  });
+};
+
 module.exports = {
   comparePassword,
   insertIntoUserQuery,
@@ -173,5 +200,7 @@ module.exports = {
   getShoeByID,
   getLastOredrNo,
   getShopOrders,
+  getItemPrice,
+  CreateOrder,
   
 };
