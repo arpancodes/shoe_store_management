@@ -103,29 +103,35 @@ const createShoeQuery = () => {
 const insertIntoShoeQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      `INSERT into Shoe ()
+      `INSERT into Shoe (brand, size, color, cost, description, shop_id, image)
        values
       ("Jordan Delta", 9, "brown", 15000, "comfortable and durable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/200faef3-9f80-4d5f-83e1-37c57851bb89/jordan-delta-2-mens-shoes-0zS4N1.png"),
+      ("Jordan Max 270", 10, "brown", 15000, "comfort and durable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/dfc55052-d324-4194-89ba-455f1058b9e2/air-max-270-mens-shoes-KkLcGR.png"),
+      ("Jordan Retro", 10, "yellow", 12000, "royal ", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/39a83668-705d-49b0-aed5-ede91d2241aa/jordan-ma2-womens-shoes-NTBqKg.png"),
+      ("Jordan xxx", 10, "brown", 15000, "comfortable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/3a07a8fd-b276-4841-9d96-6b16fac562e8/air-jordan-1-low-g-golf-shoes-94QHHm.png"),
+      ("Jordan lit", 10, "white", 15000, "durable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/5aafb79f-1a67-401b-bce7-e6f3924b2752/air-jordan-og-womens-shoes-lCKXf8.png"),
+      ("Jordan Maxy", 10, "black", 15000, "comfortable and durable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/6d332ff4-8e8d-4fa4-8888-aa42dcd9e422/air-jordan-og-womens-shoe-DZ7xk2.png"),
       ("Jordan 1 mid", 10, "white", 10000, "classy and pure street fashion", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/61a4f2d8-0a65-4b34-8113-3163aea9198b/air-jordan-1-mid-shoes-Z4WQkS.png"),
       ("Jordan max aura 3", 8,"black",7000,"Black has its own identity", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/4b1d61f1-da74-4812-929c-0b1ad8c8e674/jordan-max-aura-3-mens-shoes-lqz9jG.png"),
       ("Jordan Lebron 19", 9, "blue",8500, "the drip all over it",01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/c2db773f-985f-4676-88ec-4674abf99594/lebron-19-basketball-shoe-wnc35S.png"),
-      ("Jordan Air Max 90", 10, "rainbow", 17000,"the colourful glismpse of rainbow reflects on it", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/bc921490-8f56-4a14-8d38-5df8cc8af6d9/air-max-90-x-lhm-shoes-0bFJ5Z.png")
-      ("Nike zoomx", 10, "yellow", 17000,"the colourful glismpse of rainbow reflects on it",02, "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/f4777c67-eb80-4315-88a5-13bdd5d5efa9/zoomx-vaporfly-next-2-ekiden-road-racing-shoes-9FXr0Z.png")
-      ("Nike lebron 9", 10, "black", 17000,"exclusive lebron stylish",02, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/88bd2660-a67c-4bc5-a606-79a03de31665/lebron-9-shoes-j6jK09.png")
-      ("Adidas superstar", 10, "black", 17000,"fashion for the young",03, "https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/782b27d3824f467d81fbad0800cbd207_9366/superstar-shoes.jpg")
-      ("Adidas usa 84", 10, "green", 17000,"natural kick with greenish look",03, "https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/6d094394e1784707b5b2ad1f0091396c_9366/usa-84-shoes.jpg")
-      ("Puma Gymx", 10, "black", 14000,"natural kick with blackish look",04, "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/193157/03/sv01/fnd/IND/fmt/png/Radiate-Low-Alt-Training-Shoes")
-      ("Puma persist", 10, "blue", 18000,"natural kick with blue-sea look",04, "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/192616/04/sv01/fnd/IND/fmt/png/Persist-XT-Knit-SoftFoam+-Men%E2%80%99s-Training-Shoes")
-      ("Crocs pacer", 10, "off-white", 16000,"premium quality with asestatic style",05, "https://www.shopcrocs.in/media/catalog/product/2/0/205234_160_alt140.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=1200&width=960&auto=webp&format=pjpg")
-      ("Crocs offcourt", 10, "deep blue", 10000, "classic blue with style",05, "https://www.shopcrocs.in/media/catalog/product/2/0/206011_462_alt140.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=1200&width=960&auto=webp&format=pjpg")
-      ("Bata originals", 10, "brown", 12000,"best look for office as you can get",06, "https://www.bata.in/dw/image/v2/BCLG_PRD/on/demandware.static/-/Sites-bata-in-master-catalog/default/dw058bbed3/images/tile/8544607_2.jpeg?sw=330")
-      ("Bata Hush", 10, "black", 13000,"Black classic for office or party or anywhere",06, "https://www.bata.in/dw/image/v2/BCLG_PRD/on/demandware.static/-/Sites-bata-in-master-catalog/default/dw064e40dc/images/tile/8346491_2.jpeg?sw=330")
-      ("Versace Trigreca", 10, "black", 150000,"the best you get in a shoe",07, "https://www.versace.com/dw/image/v2/ABAO_PRD/on/demandware.static/-/Sites-ver-master-catalog/default/dwa1e973d6/original/90_DSU8094-D15TCG_D4D_20_TrigrecaTrainers-TrigrecaSneakers-versace-online-store_5_3.jpg?sw=850&sh=1200&sm=fit")
-      ("Versace Trigreca 2", 10, "white", 170000,"better than the best in white shade",07, "https://www.versace.com/dw/image/v2/ABAO_PRD/on/demandware.static/-/Sites-ver-master-catalog/default/dw631cadf9/original/90_DSU8094-D16TCG_D014H_20_TrigrecaTrainers-TrigrecaSneakers-versace-online-store_1_3.jpg?sw=414&sh=582&sm=fit&sfrm=jpg")
-      ("Trends attitude", 10, "black", 20000,"stylish with classic black",08, "https://assets.ajio.com/medias/sys_master/root/20210318/khGo/60537e057cdb8c1f14668d2d/hi-attitude_black_panelled_round-toe_ballerinas.jpg")
-      ("Trends hi", 10, "yellow", 16000,"casual yellow you can wear anywhere",08, "https://assets.ajio.com/medias/sys_master/root/20210218/CM6f/602e66ce7cdb8c1f1443705d/hi-attitude_brown_printed_slip-on_causal_shoes.jpg")
-      ("Campus First", 10, "green", 15000,"comfort at its best",09, "https://cdn.shopify.com/s/files/1/0607/6678/1671/products/FIRST-11G-787-WHT-SIL-B.ORG_2_460x.jpg?v=1639241973")
-      ("Campus Asia", 10, "black", 10000,"casual cum stylish you can put on going anywhere",09, "https://cdn.shopify.com/s/files/1/0607/6678/1671/products/CG-352-G-BLK-RED-1_460x.jpg?v=1639240837") ,`,
+      ("Jordan Air Max 90", 10, "rainbow", 17000,"the colourful glismpse of rainbow reflects on it", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/bc921490-8f56-4a14-8d38-5df8cc8af6d9/air-max-90-x-lhm-shoes-0bFJ5Z.png"),
+      ("Nike zoomx", 10, "yellow", 17000,"the colourful glismpse of rainbow reflects on it",02, "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/f4777c67-eb80-4315-88a5-13bdd5d5efa9/zoomx-vaporfly-next-2-ekiden-road-racing-shoes-9FXr0Z.png"),
+      ("Nike lebron 9", 10, "black", 17000,"exclusive lebron stylish",02, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/88bd2660-a67c-4bc5-a606-79a03de31665/lebron-9-shoes-j6jK09.png"),
+      ("Adidas superstar", 10, "black", 17000,"fashion for the young",03, "https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/782b27d3824f467d81fbad0800cbd207_9366/superstar-shoes.jpg"),
+      ("Adidas usa 84", 10, "green", 17000,"natural kick with greenish look",03, "https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/6d094394e1784707b5b2ad1f0091396c_9366/usa-84-shoes.jpg"),
+      ("Puma Gymx", 10, "black", 14000,"natural kick with blackish look",04, "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/193157/03/sv01/fnd/IND/fmt/png/Radiate-Low-Alt-Training-Shoes"),
+      ("Puma persist", 10, "blue", 18000,"natural kick with blue-sea look",04, "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/192616/04/sv01/fnd/IND/fmt/png/Persist-XT-Knit-SoftFoam+-Men%E2%80%99s-Training-Shoes"),
+      ("Crocs pacer", 10, "off-white", 16000,"premium quality with asestatic style",05, "https://www.shopcrocs.in/media/catalog/product/2/0/205234_160_alt140.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=1200&width=960&auto=webp&format=pjpg"),
+      ("Crocs offcourt", 10, "deep blue", 10000, "classic blue with style",05, "https://www.shopcrocs.in/media/catalog/product/2/0/206011_462_alt140.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=1200&width=960&auto=webp&format=pjpg"),
+      ("Bata originals", 10, "brown", 12000,"best look for office as you can get",06, "https://www.bata.in/dw/image/v2/BCLG_PRD/on/demandware.static/-/Sites-bata-in-master-catalog/default/dw058bbed3/images/tile/8544607_2.jpeg?sw=330"),
+      ("Bata Hush", 10, "black", 13000,"Black classic for office or party or anywhere",06, "https://www.bata.in/dw/image/v2/BCLG_PRD/on/demandware.static/-/Sites-bata-in-master-catalog/default/dw064e40dc/images/tile/8346491_2.jpeg?sw=330"),
+      ("Versace Trigreca", 10, "black", 150000,"the best you get in a shoe",07, "https://www.versace.com/dw/image/v2/ABAO_PRD/on/demandware.static/-/Sites-ver-master-catalog/default/dwa1e973d6/original/90_DSU8094-D15TCG_D4D_20_TrigrecaTrainers-TrigrecaSneakers-versace-online-store_5_3.jpg?sw=850&sh=1200&sm=fit"),
+      ("Versace Trigreca 2", 10, "white", 170000,"better than the best in white shade",07, "https://www.versace.com/dw/image/v2/ABAO_PRD/on/demandware.static/-/Sites-ver-master-catalog/default/dw631cadf9/original/90_DSU8094-D16TCG_D014H_20_TrigrecaTrainers-TrigrecaSneakers-versace-online-store_1_3.jpg?sw=414&sh=582&sm=fit&sfrm=jpg"),
+      ("Trends attitude", 10, "black", 20000,"stylish with classic black",08, "https://assets.ajio.com/medias/sys_master/root/20210318/khGo/60537e057cdb8c1f14668d2d/hi-attitude_black_panelled_round-toe_ballerinas.jpg"),
+      ("Trends hi", 10, "yellow", 16000,"casual yellow you can wear anywhere",08, "https://assets.ajio.com/medias/sys_master/root/20210218/CM6f/602e66ce7cdb8c1f1443705d/hi-attitude_brown_printed_slip-on_causal_shoes.jpg"),
+      ("Campus First", 10, "green", 15000,"comfort at its best",09, "https://cdn.shopify.com/s/files/1/0607/6678/1671/products/FIRST-11G-787-WHT-SIL-B.ORG_2_460x.jpg?v=1639241973"),
+      ("Campus Asia", 10, "black", 10000,"casual cum stylish you can put on going anywhere",09, "https://cdn.shopify.com/s/files/1/0607/6678/1671/products/CG-352-G-BLK-RED-1_460x.jpg?v=1639240837")`,
+      
       (err, result) => {
         if (err) {
           reject(err);
@@ -169,7 +175,7 @@ const insertIntoManagerQuery = () => {
 const createOrderQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      "CREATE TABLE if not exists orders(order_id int, shoe_id int, foreign key(shoe_id) references shoe(id) on delete cascade on update cascade, cus_id int, foreign key(cus_id) references user(id) on delete cascade on update cascade, shop varchar(50) NOT NULL, status varchar(50) NOT NULL, primary key(order_id, shoe_id))",
+      "CREATE TABLE if not exists orders(order_id int, shoe_id int, foreign key(shoe_id) references shoe(id) on delete cascade on update cascade, cus_id int, foreign key(cus_id) references user(id) on delete cascade on update cascade, status varchar(50) NOT NULL, primary key(order_id, shoe_id), quantity int NOT NULL, amount int NOT NULL)",
       (err, result) => {
         if (err) {
           reject(err);
@@ -185,11 +191,11 @@ const insertIntoOrderQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
       `INSERT into Orders values
-      (120, 102, 1, "Nike Sneakers", "out for delivery" ),
-      (121, 104, 2, "Relaince Trends", "order placed"),
-      (122,101,3, "Nike Sneakers", "shipped"),
-      (123,103,1,"Adidas Shoes","out for delivery"),
-      (124,105, 2, "Versace Leathers" ,"order placed")`,
+      (120, 102, 1, "out for delivery", 1, 14000 ),
+      (121, 104, 2, "order placed", 2, 15000),
+      (122,101,3, "shipped", 2, 10000),
+      (123,103,1,"out for delivery", 1, 13000),
+      (124,105, 2,"order placed", 1, 17000)`,
       (err, result) => {
         if (err) {
           reject(err);
@@ -205,7 +211,7 @@ const insertIntoOrderQuery = () => {
 const createPaymentQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      "CREATE TABLE if not exists payment (id int primary key, ord_id int, foreign key(ord_id) references orders(order_id) on delete cascade on update cascade, user_id int, foreign key(user_id) references user(id) on delete cascade on update cascade, mode varchar(50) NOT NULL, time datetime NOT NULL, amount int NOT NULL)",
+      "CREATE TABLE if not exists payment (id int primary key, ord_id int, foreign key(ord_id) references orders(order_id) on delete cascade on update cascade, mode varchar(50) NOT NULL, time datetime NOT NULL, amount int NOT NULL, status varchar(200) NOT NULL)",
       (err, result) => {
         if (err) {
           reject(err);
@@ -222,11 +228,11 @@ const insertIntoPaymentQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
       `INSERT into Payment values
-      (200,120,1,"cash", "2010-03-12 16:35:22", 15000),
-      (201,123,1,"cash","2020-04-15 17:20:25", 10000),
-      (202,121,2,"upi","2021-12-29 19:56:12", 25500),
-      (203,122,3,"card","2015-09-24 23:45:57", 10000),
-      (204,124,2,"card","2017-10-24 15:36:47", 15000)`,
+      (200,120,"cash", "2010-03-12 16:35:22", 15000,"payment done"),
+      (201,123,"cash","2020-04-15 17:20:25", 10000,"payment pending"),
+      (202,121,"upi","2021-12-29 19:56:12", 25500,"transaction processing"),
+      (203,122,"card","2015-09-24 23:45:57", 10000,"payment done"),
+      (204,124,"card","2017-10-24 15:36:47", 15000,"payment pending")`,
       (err, result) => {
         if (err) {
           reject(err);
@@ -250,9 +256,9 @@ const driverFunction = async () => {
     await createManagerQuery();
     await insertIntoManagerQuery();
     await createOrderQuery();
-    await insertIntoOrderQuery();
+    // await insertIntoOrderQuery();
     await createPaymentQuery();
-    await insertIntoPaymentQuery();
+    // await insertIntoPaymentQuery();
     db.end();
   } catch (e) {
     console.error(e);
