@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true })); // parses incoming requests wit
 
 app.use("/shops", shopRouter);
 app.use("/auth", authRouter);
-app.use("/order", orderRouter);
+app.use("/orders", orderRouter);
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("App is listening on port " + listener.address().port);

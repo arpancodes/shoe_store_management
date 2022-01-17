@@ -132,7 +132,7 @@ const getShoeByID = (id, shopID) => {
   });
 };
 
-const getLastOredrNo = () => {
+const getLastOrderNo = () => {
   return new Promise((resolve, reject) => {
     db.query(
       `SELECT value from _GLOBAL where _key = "LAST_ORDER"`,
@@ -179,14 +179,18 @@ const getItemPrice = (ItemID) => {
 
 const CreateOrder = (CompleteOrder) => {
   return new Promise((resolve, reject) => {
-    db.query(`Insert into orders values = ?`, [CompleteOrder], (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        console.log("Values inserted in orders");
-        resolve(result);
+    db.query(
+      `Insert into orders values = ?`,
+      [CompleteOrder],
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values inserted in orders");
+          resolve(result);
+        }
       }
-    });
+    );
   });
 };
 
@@ -198,9 +202,8 @@ module.exports = {
   getShops,
   getShoesByShopID,
   getShoeByID,
-  getLastOredrNo,
+  getLastOrderNo,
   getShopOrders,
   getItemPrice,
   CreateOrder,
-  
 };
