@@ -151,7 +151,7 @@ const getLastOrderNo = () => {
 const getShopOrders = (UserID) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `SELECT order_id, shoe_id, cus_id, status, quantity, amount, brand, size, color, cost, description, p.id, s.image, fname, lname from manager m, shoe s, orders o, shop p where m.user_id = ? and m.shop_id = s.shop_id and s.id = o.shoe_id and p.id = s.shop_id`,
+      `SELECT order_id, shoe_id, cus_id, o.status, time, a.id, ord_id, quantity, a.status, amount, brand, size, color, cost, description, p.id, s.image, fname, lname from manager m, shoe s, orders o, payment a, shop p where m.user_id = ? and m.shop_id = s.shop_id and s.id = o.shoe_id and p.id = s.shop_id and a.ord_id = o.order_id`,
       [UserID],
       (err, result) => {
         if (err) {
@@ -185,6 +185,19 @@ const createOrder = (CompleteOrder) => {
         reject(err);
       } else {
         console.log("Values inserted in orders");
+        resolve(result);
+      }
+    });
+  });
+};
+
+const createPayment = (CompletePayment) => {
+  return new Promise((resolve, reject) => {
+    db.query(`Insert into payment values ?`, [CompletePayment], (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log("Values inserted in payment");
         resolve(result);
       }
     });
@@ -243,4 +256,5 @@ module.exports = {
   getItemPrice,
   createOrder,
   createManager,
+  createPayment,
 };
