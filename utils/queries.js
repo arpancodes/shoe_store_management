@@ -104,14 +104,21 @@ const getShops = () => {
 
 const getShoesByShopID = (id) => {
   return new Promise((resolve, reject) => {
-    db.query(`SELECT * from Shoe where id = ?`, [id], (err, result) => {
+    db.query(`SELECT * from Shoe where shop_id = ?`, [id], (err, result) => {
       if (err) {
         reject(err);
       } else {
         console.log("Values fetched from Shoes");
-        resolve(result[0]);
+        resolve(result);
       }
     });
   });
 };
-module.exports = { comparePassword, insertIntoUserQuery, getUserByEmail, getShopById, getShops, getShoesByShopID };
+module.exports = {
+  comparePassword,
+  insertIntoUserQuery,
+  getUserByEmail,
+  getShopById,
+  getShops,
+  getShoesByShopID,
+};
