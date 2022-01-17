@@ -245,6 +245,37 @@ const insertIntoPaymentQuery = () => {
   });
 };
 
+const createGLOBALQuery = () => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "CREATE TABLE if not exists _GLOBAL( _key varchar(50), value int)",
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Table _GLOBAL created");
+          resolve(result);
+        }
+      }
+    );
+  });
+};
+const insertIntoGLOBALQuery = () => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `INSERT into _GLOBAL values
+      ("LAST_ORDER", 1 )`,
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values inserted into _GLOBAL");
+          resolve(result);
+        }
+      }
+    );
+  });
+};
 const driverFunction = async () => {
   try {
     await createShopQuery();
@@ -259,6 +290,8 @@ const driverFunction = async () => {
     // await insertIntoOrderQuery();
     await createPaymentQuery();
     // await insertIntoPaymentQuery();
+    await createGLOBALQuery();
+    await insertIntoGLOBALQuery();
     db.end();
   } catch (e) {
     console.error(e);
