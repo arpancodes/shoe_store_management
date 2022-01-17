@@ -106,9 +106,9 @@ const insertIntoShoeQuery = () => {
       `INSERT into Shoe (brand, size, color, cost, description, shop_id, image)
        values
       ("Jordan Delta", 9, "brown", 15000, "comfortable and durable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/200faef3-9f80-4d5f-83e1-37c57851bb89/jordan-delta-2-mens-shoes-0zS4N1.png"),
-      ("Jordan Max 270", 10, "brown", 15000, "comfort and durable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/dfc55052-d324-4194-89ba-455f1058b9e2/air-max-270-mens-shoes-KkLcGR.png"),
-      ("Jordan Retro", 10, "yellow", 12000, "royal ", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/39a83668-705d-49b0-aed5-ede91d2241aa/jordan-ma2-womens-shoes-NTBqKg.png"),
-      ("Jordan xxx", 10, "brown", 15000, "comfortable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/3a07a8fd-b276-4841-9d96-6b16fac562e8/air-jordan-1-low-g-golf-shoes-94QHHm.png"),
+      ("Jordan Max 270", 10, "dark green", 15000, "comfort and durable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/dfc55052-d324-4194-89ba-455f1058b9e2/air-max-270-mens-shoes-KkLcGR.png"),
+      ("Jordan Retro", 10, "pink", 12000, "royal ", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/39a83668-705d-49b0-aed5-ede91d2241aa/jordan-ma2-womens-shoes-NTBqKg.png"),
+      ("Jordan xxx", 10, "black and white", 15000, "comfortable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/3a07a8fd-b276-4841-9d96-6b16fac562e8/air-jordan-1-low-g-golf-shoes-94QHHm.png"),
       ("Jordan lit", 10, "white", 15000, "durable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/5aafb79f-1a67-401b-bce7-e6f3924b2752/air-jordan-og-womens-shoes-lCKXf8.png"),
       ("Jordan Maxy", 10, "black", 15000, "comfortable and durable", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/6d332ff4-8e8d-4fa4-8888-aa42dcd9e422/air-jordan-og-womens-shoe-DZ7xk2.png"),
       ("Jordan 1 mid", 10, "white", 10000, "classy and pure street fashion", 01, "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/61a4f2d8-0a65-4b34-8113-3163aea9198b/air-jordan-1-mid-shoes-Z4WQkS.png"),
@@ -129,7 +129,7 @@ const insertIntoShoeQuery = () => {
       ("Versace Trigreca 2", 10, "white", 170000,"better than the best in white shade",07, "https://www.versace.com/dw/image/v2/ABAO_PRD/on/demandware.static/-/Sites-ver-master-catalog/default/dw631cadf9/original/90_DSU8094-D16TCG_D014H_20_TrigrecaTrainers-TrigrecaSneakers-versace-online-store_1_3.jpg?sw=414&sh=582&sm=fit&sfrm=jpg"),
       ("Trends attitude", 10, "black", 20000,"stylish with classic black",08, "https://assets.ajio.com/medias/sys_master/root/20210318/khGo/60537e057cdb8c1f14668d2d/hi-attitude_black_panelled_round-toe_ballerinas.jpg"),
       ("Trends hi", 10, "yellow", 16000,"casual yellow you can wear anywhere",08, "https://assets.ajio.com/medias/sys_master/root/20210218/CM6f/602e66ce7cdb8c1f1443705d/hi-attitude_brown_printed_slip-on_causal_shoes.jpg"),
-      ("Campus First", 10, "green", 15000,"comfort at its best",09, "https://cdn.shopify.com/s/files/1/0607/6678/1671/products/FIRST-11G-787-WHT-SIL-B.ORG_2_460x.jpg?v=1639241973"),
+      ("Campus First", 10, "white", 15000,"comfort at its best",09, "https://cdn.shopify.com/s/files/1/0607/6678/1671/products/FIRST-11G-787-WHT-SIL-B.ORG_2_460x.jpg?v=1639241973"),
       ("Campus Asia", 10, "black", 10000,"casual cum stylish you can put on going anywhere",09, "https://cdn.shopify.com/s/files/1/0607/6678/1671/products/CG-352-G-BLK-RED-1_460x.jpg?v=1639240837")`,
       
       (err, result) => {

@@ -131,6 +131,22 @@ const getShoeByID = (id, shopID) => {
     );
   });
 };
+
+const getLastOredrNo = () => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `SELECT value from _GLOBAL where _key = "LAST_ORDER"`,
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values fetched from _GLOBAL");
+          resolve(result[0]);
+        }
+      }
+    );
+  });
+};
 module.exports = {
   comparePassword,
   insertIntoUserQuery,
@@ -139,4 +155,6 @@ module.exports = {
   getShops,
   getShoesByShopID,
   getShoeByID,
+  getLastOredrNo,
+  
 };
