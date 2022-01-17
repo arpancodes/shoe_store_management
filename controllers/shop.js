@@ -1,4 +1,9 @@
-const { getShops, getShopById, getShoesByShopID } = require("../utils/queries");
+const {
+  getShops,
+  getShopById,
+  getShoesByShopID,
+  getShoeByID,
+} = require("../utils/queries");
 
 const getShopsHandler = (req, res) => {
   getShops()
@@ -32,4 +37,24 @@ const getShopInfoHandler = async (req, res) => {
   }
 };
 
-module.exports = { getShopsHandler, getShopInfoHandler };
+const getShoeInfoHandler = (req, res) => {
+  const { id, shopId } = req.params;
+  console.log(id, shopId);
+  getShoeByID(id, shopId)
+    .then((shoe) => {
+      res.status(200).json({
+        success: true,
+        data: {
+          shoe,
+        },
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: err,
+      });
+    });
+};
+
+module.exports = { getShopsHandler, getShopInfoHandler, getShoeInfoHandler };
