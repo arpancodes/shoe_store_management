@@ -243,6 +243,23 @@ const createManager = (userId, shopId) => {
   });
 };
 
+const updateOrders = (status, order_id) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `UPDATE orders set status = ? where order_id = ?`,
+      [status, order_id],
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values inserted in orders");
+          resolve(result);
+        }
+      }
+    );
+  });
+};
+
 module.exports = {
   comparePassword,
   insertIntoUserQuery,
