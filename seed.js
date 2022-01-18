@@ -72,7 +72,11 @@ const insertIntoUserQuery = () => {
         ("Arpan", "Abhishek", "arpan.69@gmail.com","m","bangalore", 666, "manager", "testpassword"),
         ("Abhinav","Kumar","abhikumar@gmail.com","m","mumbai",444,"customer", "testpassword"),
         ("Amartya","Nambiar","nambo.420@gmail.com","f","kerela", 696, "customer", "testpassword"),
-        ("Ankit","Saurabh","ankit.chotu@gmail.com","m","delhi", 777, "manager", "testpassword")`,
+        ("Ankit","Saurabh","ankit.chotu@gmail.com","m","delhi", 777, "manager", "testpassword"),
+        ("XYZ","Saurabh","ankit.chotu@gmail.com","m","delhi", 777, "manager", "testpassword"),
+        ("ABC","Saurabh","ankit.chotu@gmail.com","m","delhi", 777, "manager", "testpassword"),
+        ("PQR","Saurabh","ankit.chotu@gmail.com","m","delhi", 777, "manager", "testpassword"),
+        ("UVW","Saurabh","ankit.chotu@gmail.com","m","delhi", 777, "manager", "testpassword")`,
       (err, result) => {
         if (err) {
           reject(err);
@@ -194,11 +198,11 @@ const insertIntoOrderQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
       `INSERT into Orders values
-      (120, 102, 1, "out for delivery", 1, 14000 ),
-      (121, 104, 2, "order placed", 2, 15000),
-      (122,101,3, "shipped", 2, 10000),
-      (123,103,1,"out for delivery", 1, 13000),
-      (124,105, 2,"order placed", 1, 17000)`,
+      (120, 2, 1, "out for delivery", 1, 14000 ),
+      (121, 4, 2, "order placed", 2, 15000),
+      (122, 1,3, "shipped", 2, 10000),
+      (123, 3,1,"out for delivery", 1, 13000),
+      (124, 5, 2,"order placed", 1, 17000)`,
       (err, result) => {
         if (err) {
           reject(err);
@@ -214,7 +218,7 @@ const insertIntoOrderQuery = () => {
 const createPaymentQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      "CREATE TABLE if not exists payment (id int primary key, ord_id int, foreign key(ord_id) references orders(order_id) on delete cascade on update cascade, mode varchar(50) NOT NULL, time datetime NOT NULL, amount int NOT NULL, status varchar(200) NOT NULL)",
+      "CREATE TABLE if not exists payment (id int AUTO_INCREMENT primary key, ord_id int, foreign key(ord_id) references orders(order_id) on delete cascade on update cascade, mode varchar(50) NOT NULL, time datetime DEFAULT CURRENT_TIMESTAMP, amount int NOT NULL, status varchar(200) NOT NULL)",
       (err, result) => {
         if (err) {
           reject(err);
@@ -230,12 +234,12 @@ const createPaymentQuery = () => {
 const insertIntoPaymentQuery = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      `INSERT into Payment values
-      (200,120,"cash", "2010-03-12 16:35:22", 15000,"payment done"),
-      (201,123,"cash","2020-04-15 17:20:25", 10000,"payment pending"),
-      (202,121,"upi","2021-12-29 19:56:12", 25500,"transaction processing"),
-      (203,122,"card","2015-09-24 23:45:57", 10000,"payment done"),
-      (204,124,"card","2017-10-24 15:36:47", 15000,"payment pending")`,
+      `INSERT into payment (ord_id, mode, amount, status) values
+      (120,"cash", 15000,"payment done"),
+      (123,"cash", 10000,"payment pending"),
+      (121,"upi", 25500,"transaction processing"),
+      (122,"card", 10000,"payment done"),
+      (124,"card", 15000,"payment pending")`,
       (err, result) => {
         if (err) {
           reject(err);
@@ -279,6 +283,23 @@ const insertIntoGLOBALQuery = () => {
     );
   });
 };
+
+const createPaymentTrigger = () => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `CREATE TRIGGER payment_success_trigger BEFORE INSERT ON payment FOR EACH ROW UPDATE Orders SET status = "PAYMENT_RECEIVED" WHERE order_id = NEW.ord_id;`,
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Trigger created on payment table");
+          resolve(result);
+        }
+      }
+    );
+  });
+};
+
 const driverFunction = async () => {
   try {
     await createShopQuery();
@@ -290,9 +311,10 @@ const driverFunction = async () => {
     await createManagerQuery();
     await insertIntoManagerQuery();
     await createOrderQuery();
-    // await insertIntoOrderQuery();
+    await insertIntoOrderQuery();
     await createPaymentQuery();
-    // await insertIntoPaymentQuery();
+    await createPaymentTrigger();
+    await insertIntoPaymentQuery();
     await createGLOBALQuery();
     await insertIntoGLOBALQuery();
     db.end();

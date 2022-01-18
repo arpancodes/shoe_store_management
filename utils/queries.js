@@ -191,16 +191,37 @@ const createOrder = (CompleteOrder) => {
   });
 };
 
-const createPayment = (CompletePayment) => {
+const getOrderById = (OrderID) => {
   return new Promise((resolve, reject) => {
-    db.query(`Insert into payment values ?`, [CompletePayment], (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        console.log("Values inserted in payment");
-        resolve(result);
+    db.query(
+      `SELECT * from orders where order_id = ?`,
+      [OrderID],
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values fetched from orders");
+          resolve(result);
+        }
       }
-    });
+    );
+  });
+};
+
+const createPayment = (ord_id, mode, amount, status) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `Insert into payment (ord_id, mode, amount, status) values (?, ?, ?, ?)`,
+      [ord_id, mode, amount, status],
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values inserted in payment");
+          resolve(result);
+        }
+      }
+    );
   });
 };
 
@@ -274,4 +295,6 @@ module.exports = {
   createOrder,
   createManager,
   createPayment,
+  getOrderById,
+  updateOrders,
 };
