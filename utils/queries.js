@@ -281,6 +281,56 @@ const updateOrders = (status, order_id) => {
   });
 };
 
+const getCustomerOrder = (cus_id) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `Select brand, size, color, cost, description, shop_id, image, id, order_id, cus_id, status, shoe_id, amount, quantity from orders o, shoe s, shop p where o.cus_id = ? `,
+      [cus_id],
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values inserted in orders");
+          resolve(result);
+        }
+      }
+    );
+  });
+};
+
+const getAllShoes = () => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `Select brand, size, color, cost, description, shop_id, image, name from shoe s, shop p `,
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values inserted in Shoes");
+          resolve(result);
+        }
+      }
+    );
+  });
+};
+
+const getFilteredShoes = (search) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `Select * from shoe where brand like %?% `,
+      [search],
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log("Values inserted in Shoes");
+          resolve(result);
+        }
+      }
+    );
+  });
+};
+
 module.exports = {
   comparePassword,
   insertIntoUserQuery,
@@ -297,4 +347,7 @@ module.exports = {
   createPayment,
   getOrderById,
   updateOrders,
+  getCustomerOrder,
+  getAllShoes,
+  getFilteredShoes,
 };
