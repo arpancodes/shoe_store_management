@@ -4,9 +4,16 @@ const authRouter = require("./routers/auth");
 const shopRouter = require("./routers/shop");
 const orderRouter = require("./routers/order");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const app = express();
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: ["http://localhost:3001"],
+    credentials: true,
+  })
+);
 app.use(express.json()); // parses incoming requests with JSON payloads
 app.use(express.urlencoded({ extended: true })); // parses incoming requests with URL encoded payloads
 

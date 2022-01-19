@@ -118,7 +118,7 @@ const getShoesByShopID = (id) => {
 const getShoeByID = (id, shopID) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `SELECT * from Shoe where id = ? and shop_id = ?`,
+      `SELECT Shoe.brand, Shop.name as shop_name, Shoe.id, Shoe.size, Shoe.color, Shoe.cost, Shoe.description, Shoe.image  from Shoe, Shop where Shoe.id = ? and shop_id = ? and Shoe.shop_id = Shop.id`,
       [id, shopID],
       (err, result) => {
         if (err) {

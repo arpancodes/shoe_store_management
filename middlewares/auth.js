@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const authorization = (req, res, next) => {
   const token = req.cookies.access_token;
+  console.log(req.cookies);
   if (!token) {
     return res.sendStatus(401);
   }
@@ -10,6 +11,7 @@ const authorization = (req, res, next) => {
     console.log(data);
     req.userId = data.userId;
     req.role = data.type;
+    req.email = data.email;
     return next();
   } catch {
     return res.sendStatus(401);

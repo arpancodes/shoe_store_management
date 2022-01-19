@@ -7,8 +7,7 @@ const {
 } = require("../utils/queries");
 
 const register = async (req, res) => {
-  const { fname, lname, email, gender, address, phone, type, password } =
-    req.body;
+  const { fname, lname, email, gender, address, phone, password } = req.body;
   try {
     await insertIntoUserQuery(
       fname,
@@ -17,13 +16,16 @@ const register = async (req, res) => {
       gender,
       address,
       phone,
-      type,
+      "customer",
       password
     );
     res.json({ success: true, message: "User Created" });
   } catch (e) {
     console.log(e);
-    res.status(400).json({ success: false, message: "Couldn't insert" });
+    res.status(400).json({
+      success: false,
+      message: "User can't be registered, Please try again.",
+    });
   }
 };
 
@@ -42,7 +44,7 @@ const login = async (req, res) => {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
         })
-        .json({ success: true, message: "Logged in" });
+        .json({ success: true, message: "Logged in", data: user });
     } else {
       return res
         .status(400)
@@ -71,4 +73,10 @@ const makeManager = async (req, res) => {
   }
 };
 
-module.exports = { register, login, logout, makeManager };
+const getUser = async (req, res) => {
+  const { email } = req;
+  const user = await getUserByEmail(email);
+  return res.json({ success: true, data: user });
+};
+
+module.exports = { register, login, logout, makeManager, getUser };

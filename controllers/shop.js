@@ -40,7 +40,6 @@ const getShopInfoHandler = async (req, res) => {
 
 const getShoeInfoHandler = (req, res) => {
   const { id, shopId } = req.params;
-  console.log(id, shopId);
   getShoeByID(id, shopId)
     .then((shoe) => {
       res.status(200).json({
