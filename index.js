@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const authRouter = require("./routers/auth");
 const shopRouter = require("./routers/shop");
+const shoeRouter = require("./routers/shoe");
 const orderRouter = require("./routers/order");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -18,6 +19,7 @@ app.use(express.json()); // parses incoming requests with JSON payloads
 app.use(express.urlencoded({ extended: true })); // parses incoming requests with URL encoded payloads
 
 app.use("/shops", shopRouter);
+app.use("/shoes", shoeRouter);
 app.use("/auth", authRouter);
 app.use("/orders", orderRouter);
 

@@ -191,11 +191,11 @@ const createOrder = (CompleteOrder) => {
   });
 };
 
-const getOrderById = (OrderID,cid) => {
+const getOrderById = (OrderID, cid) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `SELECT order_id, quantity, amount, o.status, brand, size, color, description, name from orders o, shoe s, shop p, where o.shoe_id = s.id and s.shop_id = p.id and order_id = ? and cus_id = ?`,
-      [OrderID,cid],
+      `SELECT order_id, quantity, amount, o.status, shoe_id, brand, size, color, description, name as store_name, s.image from orders o, shoe s, shop p where o.shoe_id = s.id and s.shop_id = p.id and o.order_id = ? and cus_id = ?`,
+      [OrderID, cid],
       (err, result) => {
         if (err) {
           reject(err);
@@ -281,10 +281,28 @@ const updateOrders = (status, order_id) => {
   });
 };
 
+const updateOrderNumber = (newOrderNumber) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `UPDATE _GLOBAL set value = ? where _key = 'LAST_ORDER'`,
+      [newOrderNumber],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          console.log("Updated last order value");
+          resolve(result);
+        }
+      }
+    );
+  });
+};
+
 const getCustomerOrder = (cus_id) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `Select brand, size, color, cost, description, shop_id, image, id, order_id, cus_id, status, shoe_id, amount, quantity from orders o, shoe s, shop p where o.cus_id = ? `,
+      `Select brand, count(order_id) as total_items, size, color, cost, description, shop_id, s.image, order_id, cus_id, status, shoe_id, sum(amount*quantity) as total_amount from orders o, shoe s, shop p where o.shoe_id = s.id and s.shop_id = p.id and o.cus_id = ? group by o.order_id order by order_id desc`,
       [cus_id],
       (err, result) => {
         if (err) {
@@ -301,12 +319,12 @@ const getCustomerOrder = (cus_id) => {
 const getAllShoes = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      `Select brand, size, color, cost, description, shop_id, image, name from shoe s, shop p `,
+      `Select s.id, brand, size, color, cost, description, shop_id, s.image, name from shoe s, shop p where s.shop_id = p.id`,
       (err, result) => {
         if (err) {
           reject(err);
         } else {
-          console.log("Values inserted in Shoes");
+          console.log("Values fetched from Shoes");
           resolve(result);
         }
       }
@@ -317,13 +335,13 @@ const getAllShoes = () => {
 const getFilteredShoes = (search) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `Select * from shoe where brand like %?% `,
-      [search],
+      `Select s.id, brand, size, color, cost, description, shop_id, s.image, name from shoe s, shop p where brand like ? and s.shop_id = p.id`,
+      [`%${search}%`],
       (err, result) => {
         if (err) {
           reject(err);
         } else {
-          console.log("Values inserted in Shoes");
+          console.log("Values fetched from Shoes");
           resolve(result);
         }
       }
@@ -350,4 +368,5 @@ module.exports = {
   getCustomerOrder,
   getAllShoes,
   getFilteredShoes,
+  updateOrderNumber,
 };
