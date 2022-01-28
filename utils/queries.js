@@ -191,11 +191,11 @@ const createOrder = (CompleteOrder) => {
   });
 };
 
-const getOrderById = (OrderID) => {
+const getOrderById = (OrderID,cid) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `SELECT * from orders where order_id = ?`,
-      [OrderID],
+      `SELECT order_id, quantity, amount, o.status, brand, size, color, description, name from orders o, shoe s, shop p, where o.shoe_id = s.id and s.shop_id = p.id and order_id = ? and cus_id = ?`,
+      [OrderID,cid],
       (err, result) => {
         if (err) {
           reject(err);

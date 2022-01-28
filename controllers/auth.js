@@ -31,6 +31,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
+  console.log(email, password)
   try {
     const user = await getUserByEmail(email);
     const isMatch = await comparePassword(password, user.password);
@@ -51,6 +52,7 @@ const login = async (req, res) => {
         .json({ success: false, message: "Wrong password" });
     }
   } catch (e) {
+    console.log(e)
     return res.status(500).json({ success: false, message: "User not found" });
   }
 };
