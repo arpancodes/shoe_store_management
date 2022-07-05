@@ -1,3 +1,5 @@
+> Frontend of the app can be found here: https://github.com/arpancodes/shoe_store_management_fe
+
 ## Getting started
 
 1. Clone the repository
